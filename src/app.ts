@@ -4,8 +4,8 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundError } from "./errors/not-found-error";
+import { errorHandler } from "@raipackages/common";
+import { NotFoundError } from "@raipackages/common";
 
 import cookieSession from "cookie-session";
 
@@ -27,7 +27,7 @@ app.use(signinRouter);
 app.use(signupRouter);
 app.use(signoutRouter);
 
-app.all("*", (req, res, next) => {
+app.use((req, res, next) => {
   next(new NotFoundError());
 });
 
